@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/base64"
+	"fmt"
 	"time"
 
 	"github.com/go-redsync/redsync/v4/redis"
@@ -288,7 +289,7 @@ func (m *Mutex) touch(ctx context.Context, pool redis.Pool, value string, expiry
 		touchScript = touchWithSetNXScript
 	}
 
-	status, err := conn.Eval(touchScript, m.name, value, expiry)
+	status, err := conn.Eval(touchScript, m.name, value, fmt.Sprintf(`%d`, expiry))
 	if err != nil {
 		return false, err
 	}
