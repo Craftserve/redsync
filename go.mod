@@ -1,4 +1,4 @@
-module github.com/go-redsync/redsync/v4
+module github.com/Craftserve/redsync/v4
 
 go 1.20
 
